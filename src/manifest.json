@@ -1,0 +1,19 @@
+{
+	"manifest_version": 2,
+	"name": "Neo Mildom",
+	"version": "0.0.4",
+	"description": "Mildomを縦長ウィンドウで見る際のUIを改良。上に画面, 下にチャット欄の配置に。これぞネオなMildom。",
+	"icons" :
+	{
+		"16": "icon/icon16.png",
+		"48" : "icon/icon48.png",
+		"128" : "icon/icon128.png"
+	},
+	"content_scripts": [ {
+		"matches": ["*://www.mildom.com/*"],
+		"css": ["styles/neo-mildom.css"],
+		"js": ["scripts/content.js"],
+		"run_at" : "document_end"
+	} ],
+	"permissions" : ["*://www.mildom.com/*"]
+}

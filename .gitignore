@@ -2,3 +2,4 @@ node_modules/
 .vscode/
 .intermediate/
 release.zip
+design/
