@@ -1,140 +1,207 @@
 @charset 'UTF-8';
 
-#neo-mildom--gift {
+$headerHeight: 50px + 84;
+$leftMenuWidth: 60px;
+$aspectRatio: 0.5625;
+$displaySwitchHeight: 25px;
+
+// 難読化対応
+@function getGiftPanel($prefixString: '') {
+	@return $prefixString + 'div.m57z8b-0, ' + $prefixString + 'div.gift-panel';
+}
+
+@function getRelative($prefixString: '') {
+	@return $prefixString + 'div.xr43zp-0, ' + $prefixString + 'div.room-relative';
+}
+
+@function getPlaybackPageMore($prefixString: '') {
+	@return $prefixString + 'div.playback-page__more';
+}
+
+@function getRoomChatWrapper($prefixString: '') {
+	@return $prefixString + 'div.xb72g0-2, ' + $prefixString + 'div.room__chat';
+}
+
+@function getRoomChat($prefixString: '') {
+	@return $prefixString + 'div.ycw4tr-0, ' + $prefixString + 'div.chat-panel';
+}
+
+@function getRoomChatHeader($prefixString: '') {
+	@return $prefixString + 'div.ycw4tr-2, ' + $prefixString + 'div.chat-panel__header';
+}
+
+@function getCommentPanel($prefixString: '') {
+	@return $prefixString + 'div.ycw4tr-3, ' + $prefixString + 'div.chat-panel__footer';
+}
+
+// 横長ウィンドウ時、tsで追加する要素は非表示
+.ts--neo-mildom {
 	display: none;
 }
 
-#neo-mildom--relative {
-	display: none;
-}
-
-#neo-mildom--comment {
-	display: none;
-}
-
-#neo-mildom--playback {
-	display: none;
-}
-
-.neo-mildom--display-switch {
-	display: none;
-}
-
+// 縦長ウィンドウ時
+// Mildomのブレイクポイントに合わせる
 @media only screen and (max-width: 900px) {
-	div.room__body {
+	// 左/右カラムを縦並びとする
+	div.content, div.room__body {
 		flex-direction: column;
 	}
 
+	// 隠し対象を隠す
+	#{getGiftPanel()}, #{getRelative()}, #{getPlaybackPageMore()}, #{getRoomChatHeader()} {
+		transform: scaleY(0);
+		transition-duration: .2s;
+	}
+
+	// ts追加の独自表示切替スイッチ
 	.neo-mildom--display-switch {
 		display: flex;
 		
-		height: 25px;
+		height: #{$displaySwitchHeight};
 		
 		font-family: inherit;
 		font-size: 12px;
 		color: #8d8d8d;
+
+		&__description {
+			padding: 5px 10px;
+		}
+
+		&__label {
+			display: block;
+			
+			padding: 5px 10px;
+			border: 1px solid #efefef;
+			
+			border-radius: 11px;
+
+			&:hover {
+				color: #38cce3;
+			}
+
+			&--comment {
+				margin-left: auto;
+			}
+		}
 	}
 
-	.neo-mildom--display-switch__description {
-		padding: 5px 10px;
-	}
-
-	.neo-mildom--display-switch__label {
-		display: block;
-		
-		padding: 5px 10px;
-		border: 1px solid #efefef;
-		
-		border-radius: 11px;
-	}
-
-	.neo-mildom--display-switch__label--comment {
-		margin-left: auto;
-	}
-
-	.neo-mildom--display-switch__label:hover {
-		color: #38cce3;
-	}
-
-	div.gift-panel, div.room-relative, div.playback-page__more {
-		transform: scaleY( 0 );
-		transition-duration: .2s;
-	}
-
-	div.gift-panel {
+	// ギフトパネルの位置調整
+	#{getGiftPanel()} {
 		position: fixed;
-		top: calc( (100vw - 52px) * 0.5625 + 130px );
-		left: 52px;
+		top: calc((100vw - #{$leftMenuWidth}) * #{$aspectRatio} + #{$headerHeight} + #{$displaySwitchHeight});
+		left: #{$leftMenuWidth};
 		z-index: 199;
 
-		width: calc( 100vw - 52px );
+		width: calc(100vw - #{$leftMenuWidth});
 	}
 
-	div.room-relative, div.playback-page__more {
+	// おすすめ動画などの位置調整
+	#{getRelative()}, #{getPlaybackPageMore()} {
 		position: relative;
 		z-index: 198;
 		
-		width: calc( 100vw - 52px );
+		width: calc(100vw - #{$leftMenuWidth});
 		
 		background-color: #fff;
 		overflow: scroll;
 	}
 
-	#neo-mildom--gift:checked ~ div.gift-panel,
-	#neo-mildom--relative:checked ~ div.room-relative,
-	#neo-mildom--playback:checked ~ div.playback-page__more {
-		transform: scaleY( 1 );
+	// 上記ダークモード
+	div.hVrvYv {
+		background-color: rgb(32, 33, 35);
 	}
 
-	div.room__chat {
+	// スイッチ入った隠し対象は表示
+	#{getGiftPanel('#neo-mildom--gift:checked ~ ')},
+	#{getRelative('#neo-mildom--relative:checked ~ ')},
+	#{getPlaybackPageMore('#neo-mildom--playback:checked ~ ')},
+	#{getRoomChatHeader('#neo-mildom--chat-panel-header:checked ~ ')} {
+		transform: scaleY(1);
+	}
+
+	// チャット表示欄のラッパー
+	#{getRoomChatWrapper()} {
 		display: flex;
 		flex: 1;
 		
 		position: fixed;
-		top: calc( (100vw - 52px) * 0.5625 + 130px );
-		left: 52px;
+		top: calc((100vw - #{$leftMenuWidth}) * #{$aspectRatio} + #{$headerHeight} + #{$displaySwitchHeight});
+		left: #{$leftMenuWidth};
 		z-index: 197;
 
-		width: calc( 100vw - 52px ) !important;
-		height: calc( 100vh - ((100vw - 52px) * 0.5625 + 130px) );
+		width: calc(100vw - #{$leftMenuWidth}) !important;
+		height: calc(100vh - ((100vw - #{$leftMenuWidth}) * #{$aspectRatio} + #{$headerHeight}));
 	}
 
-	div.chat-panel {
+	// チャット表示欄上部スペース圧縮
+	#{getRoomChat()} {
 		padding-top: 0;
-		padding-bottom: 100px;
 	}
 
-	div.chat-panel__header {
+	// チャット入力欄ラッパー
+	#{getCommentPanel()} {
+		position: fixed;
+		bottom: 0;
+
+		// (チャット入力欄高さ合計) - (アイコン欄topデフォルト - 修正値) - (テキストエリアtopデフォルト - 修正値) - 微調整
+		height: (1px + 21px + 26 + 50 + 58) - (21 - 10) - (58 - 40) - 26;
+		width: calc(100vw - #{$leftMenuWidth});
+
+		background-color: #fff;
+
+		transform: scaleY(1);
+		transition-duration: .2s;
+	}
+
+	// 上記ダークモード
+	div.ipsuFW {
+		background-color: rgb(21, 25, 27);
+	}
+
+	// チャット非表示スイッチオン時
+	#{getRoomChat('#neo-mildom--comment:checked ~ ')} {
+		padding-bottom: 30px;
+
+		#{getCommentPanel('& ')} {
+			transform: scaleY(0);
+		}
+	}
+
+	// チャット入力欄アイコン欄上部スペース圧縮
+	div.ycw4tr-4 {
+		top: 10px;
+	}
+
+	// チャット入力欄テキストエリア上部スペース圧縮
+	div.sc-1fhicl-0 {
+		top: 40px;
+	}
+
+	// オフィシャル伝書鳩隠し
+	// TODO CSSフレームワーク移行後のクラス名が不明。伝書鳩発生次第特定
+	div.chat-panel__relay{
 		display: none;
-		
-		position: relative;
 	}
 
-	div.chat-panel__relay {
-		display: none;
-	}
-
-	div.chat-panel__footer {
-		bottom: 65px;
-	}
-
-	div.chat-panel-input-wrap {
-		bottom: 10px;
-	}
-
-	#neo-mildom--comment:checked ~ div.chat-panel, div.chat-panel.playback-chat-panel {
-		padding-bottom: 0px;
-	}
-
-	#neo-mildom--comment:checked ~ div.chat-panel div.chat-panel__footer-container {
-		display: none;
-	}
-
+	// アーカイブでチャットが再生できる告知などいらない
 	div.playback-chat-panel-attention {
 		display: none;
 	}
 
-	div.live-end-playback {
-		overflow-y: hidden;
+	// 概要にホバーで内容を見せる
+	div.anounce {
+		&:hover {
+			height: 195px !important;
+		}
+
+		&--one-line {
+			display: block !important;
+			align-items: normal !important;
+		}
+	}
+
+	// 仕様変更でなぜか動画幅に画面をはみ出す数値が設定されたので潰す
+	div.xb72g0-0 {
+		min-width: 0;
 	}
 }
