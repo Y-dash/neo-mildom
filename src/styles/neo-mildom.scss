@@ -6,33 +6,12 @@ $aspectRatio: 0.5625;
 $displaySwitchHeight: 25px;
 
 // 難読化対応
-@function getGiftPanel($prefixString: '') {
-	@return $prefixString + 'div.m57z8b-0, ' + $prefixString + 'div.gift-panel';
-}
-
-@function getRelative($prefixString: '') {
-	@return $prefixString + 'div.xr43zp-0, ' + $prefixString + 'div.room-relative';
-}
-
-@function getPlaybackPageMore($prefixString: '') {
-	@return $prefixString + 'div.playback-page__more';
-}
-
-@function getRoomChatWrapper($prefixString: '') {
-	@return $prefixString + 'div.xb72g0-2, ' + $prefixString + 'div.room__chat';
-}
-
-@function getRoomChat($prefixString: '') {
-	@return $prefixString + 'div.ycw4tr-0, ' + $prefixString + 'div.chat-panel';
-}
-
-@function getRoomChatHeader($prefixString: '') {
-	@return $prefixString + 'div.ycw4tr-2, ' + $prefixString + 'div.chat-panel__header';
-}
-
-@function getCommentPanel($prefixString: '') {
-	@return $prefixString + 'div.ycw4tr-3, ' + $prefixString + 'div.chat-panel__footer';
-}
+$obfuscatedGiftPanel: 'div.m57z8b-0';
+$obfuscatedRelative: 'div.xr43zp-0';
+$obfuscatedRoomChat: 'div.xb72g0-2';
+$obfuscatedChatPanelHeader: 'div.ycw4tr-2';
+$obfuscatedChatPanel: 'div.ycw4tr-0';
+$obfuscatedChatPanelFooterContainer: 'div.ycw4tr-3';
 
 // 横長ウィンドウ時、tsで追加する要素は非表示
 .ts--neo-mildom {
@@ -43,14 +22,16 @@ $displaySwitchHeight: 25px;
 // Mildomのブレイクポイントに合わせる
 @media only screen and (max-width: 900px) {
 	// 左/右カラムを縦並びとする
-	div.content, div.room__body {
+	div.room__body, div.content {
 		flex-direction: column;
 	}
 
-	// 隠し対象を隠す
-	#{getGiftPanel()}, #{getRelative()}, #{getPlaybackPageMore()}, #{getRoomChatHeader()} {
+	// デフォルトで隠す対象を隠す
+	div.gift-panel, div.room-relative, div.playback-page__more, div.chat-panel__header,
+	#{$obfuscatedGiftPanel}, #{$obfuscatedRelative}, #{$obfuscatedChatPanelHeader} {
 		transform: scaleY(0);
 		transition-duration: .2s;
+		transform-origin: top center;
 	}
 
 	// ts追加の独自表示切替スイッチ
@@ -70,8 +51,9 @@ $displaySwitchHeight: 25px;
 		&__label {
 			display: block;
 			
-			padding: 5px 10px;
-			border: 1px solid #efefef;
+			margin: 2.5px 0;
+			padding: 2.5px 10px;
+			border: 1px solid #F8F8F8;
 			
 			border-radius: 11px;
 
@@ -85,8 +67,13 @@ $displaySwitchHeight: 25px;
 		}
 	}
 
+	// 全体ラッパーの高さ制限不要
+	div.default-layout__content-wrapper, div.room-container {
+		height: 100%;
+	}
+
 	// ギフトパネルの位置調整
-	#{getGiftPanel()} {
+	div.gift-panel, #{$obfuscatedGiftPanel} {
 		position: fixed;
 		top: calc((100vw - #{$leftMenuWidth}) * #{$aspectRatio} + #{$headerHeight} + #{$displaySwitchHeight});
 		left: #{$leftMenuWidth};
@@ -96,31 +83,26 @@ $displaySwitchHeight: 25px;
 	}
 
 	// おすすめ動画などの位置調整
-	#{getRelative()}, #{getPlaybackPageMore()} {
+	div.room-relative,
+	div.playback-page__more,
+	#{$obfuscatedRelative} {
 		position: relative;
 		z-index: 198;
 		
 		width: calc(100vw - #{$leftMenuWidth});
 		
 		background-color: #fff;
-		overflow: scroll;
+		overflow: hidden scroll;
 	}
-
-	// 上記ダークモード
-	div.hVrvYv {
-		background-color: rgb(32, 33, 35);
-	}
-
-	// スイッチ入った隠し対象は表示
-	#{getGiftPanel('#neo-mildom--gift:checked ~ ')},
-	#{getRelative('#neo-mildom--relative:checked ~ ')},
-	#{getPlaybackPageMore('#neo-mildom--playback:checked ~ ')},
-	#{getRoomChatHeader('#neo-mildom--chat-panel-header:checked ~ ')} {
-		transform: scaleY(1);
+	// ダークモード
+	.nono-dark-theme div.room-relative,
+	.nono-dark-theme div.playback-page__more,
+	.nono-dark-theme #{$obfuscatedRelative} {
+		background: #121414;
 	}
 
 	// チャット表示欄のラッパー
-	#{getRoomChatWrapper()} {
+	div.room__chat, #{$obfuscatedRoomChat} {
 		display: flex;
 		flex: 1;
 		
@@ -133,54 +115,38 @@ $displaySwitchHeight: 25px;
 		height: calc(100vh - ((100vw - #{$leftMenuWidth}) * #{$aspectRatio} + #{$headerHeight}));
 	}
 
-	// チャット表示欄上部スペース圧縮
-	#{getRoomChat()} {
-		padding-top: 0;
-	}
+	// チャットヘッダーの概要にホバーで内容を見せる
+	div.anounce {
+		&:hover {
+			height: 195px !important;
+		}
 
-	// チャット入力欄ラッパー
-	#{getCommentPanel()} {
-		position: fixed;
-		bottom: 0;
-
-		// (チャット入力欄高さ合計) - (アイコン欄topデフォルト - 修正値) - (テキストエリアtopデフォルト - 修正値) - 微調整
-		height: (1px + 21px + 26 + 50 + 58) - (21 - 10) - (58 - 40) - 26;
-		width: calc(100vw - #{$leftMenuWidth});
-
-		background-color: #fff;
-
-		transform: scaleY(1);
-		transition-duration: .2s;
-	}
-
-	// 上記ダークモード
-	div.ipsuFW {
-		background-color: rgb(21, 25, 27);
-	}
-
-	// チャット非表示スイッチオン時
-	#{getRoomChat('#neo-mildom--comment:checked ~ ')} {
-		padding-bottom: 30px;
-
-		#{getCommentPanel('& ')} {
-			transform: scaleY(0);
+		// ワンラインクラスの内容が邪魔なので打ち消す
+		&--one-line {
+			display: block !important;
+			align-items: normal !important;
 		}
 	}
 
-	// チャット入力欄アイコン欄上部スペース圧縮
-	div.ycw4tr-4 {
-		top: 10px;
+	// チャット表示欄 上部スペース圧縮
+	div.chat-panel, #{$obfuscatedChatPanel} {
+		padding-top: 0;
+		padding-bottom: 133px - (91 - 82) - 11;	// チャット入力欄のアイコン欄を縮めた分からさらに調整
 	}
 
-	// チャット入力欄テキストエリア上部スペース圧縮
-	div.sc-1fhicl-0 {
-		top: 40px;
+	// アーカイブのチャット表示欄
+	div.playback-chat-panel {
+		padding-bottom: 30px;
 	}
 
-	// オフィシャル伝書鳩隠し
-	// TODO CSSフレームワーク移行後のクラス名が不明。伝書鳩発生次第特定
-	div.chat-panel__relay{
+	// オフィシャル伝書鳩不要
+	div.chat-panel__relay {
 		display: none;
+	}
+
+	// チャット入力欄のアイコン欄 下げて縮める
+	div.chat-panel__footer {
+		bottom: 82px;
 	}
 
 	// アーカイブでチャットが再生できる告知などいらない
@@ -188,20 +154,24 @@ $displaySwitchHeight: 25px;
 		display: none;
 	}
 
-	// 概要にホバーで内容を見せる
-	div.anounce {
-		&:hover {
-			height: 195px !important;
-		}
-
-		&--one-line {
-			display: block !important;
-			align-items: normal !important;
-		}
+	// 表示切替でデフォルト非表示項目を表示時
+	#neo-mildom--gift:checked ~ div.gift-panel,
+	#neo-mildom--relative:checked ~ div.room-relative,
+	#neo-mildom--playback:checked ~ div.playback-page__more,
+	#neo-mildom--chat-panel-header:checked ~ div.chat-panel__header,
+	#neo-mildom--gift:checked ~ #{$obfuscatedGiftPanel},
+	#neo-mildom--relative:checked ~ #{$obfuscatedRelative},
+	#neo-mildom--chat-panel-header:checked ~ #{$obfuscatedChatPanelHeader} {
+		transform: scaleY(1);
 	}
 
-	// 仕様変更でなぜか動画幅に画面をはみ出す数値が設定されたので潰す
-	div.xb72g0-0 {
-		min-width: 0;
+	// 表示切替でチャット非表示時
+	#neo-mildom--comment:checked ~ div.chat-panel,
+	#neo-mildom--comment:checked ~ #{$obfuscatedChatPanel} {
+		padding-bottom: 30px;
+	}
+	#neo-mildom--comment:checked ~ div.chat-panel div.chat-panel__footer-container,
+	#neo-mildom--comment:checked ~ #{$obfuscatedChatPanel} div.chat-panel__footer-container {
+		display: none;
 	}
 }
