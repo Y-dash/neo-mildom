@@ -4,14 +4,17 @@ $headerHeight: 50px + 84;
 $leftMenuWidth: 60px;
 $aspectRatio: 0.5625;
 $displaySwitchHeight: 25px;
+$chatPanelFooterHeightAdjust: 9;
 
 // 難読化対応
+$obfuscatedRoomPlayer: 'div.xb72g0-0';
 $obfuscatedGiftPanel: 'div.m57z8b-0';
 $obfuscatedRelative: 'div.xr43zp-0';
 $obfuscatedRoomChat: 'div.xb72g0-2';
 $obfuscatedChatPanelHeader: 'div.ycw4tr-2';
 $obfuscatedChatPanel: 'div.ycw4tr-0';
 $obfuscatedChatPanelFooterContainer: 'div.ycw4tr-3';
+$obfuscatedChatPanelFooter: 'div.ycw4tr-4';
 
 // 横長ウィンドウ時、tsで追加する要素は非表示
 .ts--neo-mildom {
@@ -70,6 +73,11 @@ $obfuscatedChatPanelFooterContainer: 'div.ycw4tr-3';
 	// 全体ラッパーの高さ制限不要
 	div.default-layout__content-wrapper, div.room-container {
 		height: 100%;
+	}
+
+	// なぜMildomさんは動画を最小幅ウィンドウからはみ出させたがるのか
+	div.room__player, #{$obfuscatedRoomPlayer} {
+		min-width: 0;
 	}
 
 	// ギフトパネルの位置調整
@@ -131,7 +139,7 @@ $obfuscatedChatPanelFooterContainer: 'div.ycw4tr-3';
 	// チャット表示欄 上部スペース圧縮
 	div.chat-panel, #{$obfuscatedChatPanel} {
 		padding-top: 0;
-		padding-bottom: 133px - (91 - 82) - 11;	// チャット入力欄のアイコン欄を縮めた分からさらに調整
+		padding-bottom: 133px - $chatPanelFooterHeightAdjust - 11;	// チャット入力欄のアイコン欄を縮めた分からさらに調整
 	}
 
 	// アーカイブのチャット表示欄
@@ -146,7 +154,15 @@ $obfuscatedChatPanelFooterContainer: 'div.ycw4tr-3';
 
 	// チャット入力欄のアイコン欄 下げて縮める
 	div.chat-panel__footer {
-		bottom: 82px;
+		bottom: 91px - $chatPanelFooterHeightAdjust;
+	}
+	#{$obfuscatedChatPanelFooter} {
+		top: 21px - 13;
+	}
+
+	// チャット文字入力欄の下が狭くなりすぎるから上げる
+	div.sc-1fhicl-0 {
+		top: 58px - $chatPanelFooterHeightAdjust - 13;
 	}
 
 	// アーカイブでチャットが再生できる告知などいらない
