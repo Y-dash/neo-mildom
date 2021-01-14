@@ -3,9 +3,9 @@ const COMMON_CLASS_NAME: string = 'ts--neo-mildom';
 const OBFUSCATED_GIFT_PANEL: string = 'div.m57z8b-0';
 const OBFUSCATED_RELATIVE: string = 'div.xr43zp-0';
 const OBFUSCATED_ROOM_CHAT: string = 'div.xb72g0-2';
-const OBFUSCATED_CHAT_PANEL_HEADER: string = 'div.ycw4tr-2';
-const OBFUSCATED_CHAT_PANEL: string = 'div.ycw4tr-0';
-const OBFUSCATED_CHAT_PANEL_FOOTER_CONTAINER: string = 'div.ycw4tr-3';
+const OBFUSCATED_CHAT_PANEL_HEADER: string = 'div.ycw4tr-3';
+const OBFUSCATED_CHAT_PANEL: string = 'div.ycw4tr-1';
+const OBFUSCATED_CHAT_PANEL_FOOTER_CONTAINER: string = 'div.ycw4tr-4';
 
 const DISPLAY_SWITCH_CLASS: string = 'neo-mildom--display-switch';
 const DISPLAY_SWITCH_LABEL_CLASS: string = `${DISPLAY_SWITCH_CLASS}__label`;
@@ -105,12 +105,12 @@ function initOnLive() {
 }
 
 function initOnArchive() {
-	let playbackCheckbox = document.createElement('input');
+	let playbackCheckbox: HTMLElement = document.createElement('input');
 	playbackCheckbox.setAttribute('type', 'checkbox');
 	playbackCheckbox.setAttribute('id', PLAYBACK_ID);
 	playbackCheckbox.classList.add(COMMON_CLASS_NAME);
 
-	let playbackDisplaySwitch = document.createElement('div');
+	let playbackDisplaySwitch: HTMLElement = document.createElement('div');
 	playbackDisplaySwitch.setAttribute('class', DISPLAY_SWITCH_CLASS);
 	playbackDisplaySwitch.innerHTML = `
 		<div class="${DISPLAY_SWITCH_DESCRIPTION_CLASS}">表示切替</div>
