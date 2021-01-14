@@ -62,7 +62,7 @@ function init() {
 	}
 
 	// 配信ページ
-	if (getRelative() && getGiftPanel()) {
+	if (getGiftPanel()) {
 		initOnLive();
 	}
 	// アーカイブページ

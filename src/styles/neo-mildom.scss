@@ -5,6 +5,7 @@ $leftMenuWidth: 60px;
 $aspectRatio: 0.5625;
 $displaySwitchHeight: 25px;
 $chatPanelFooterHeightAdjust: 9;
+$matchVisualHeight: 400px;
 
 // 難読化対応
 $obfuscatedRoomPlayer: 'div.xb72g0-0';
@@ -24,11 +25,6 @@ $obfuscatedChatPanelFooter: 'div.ycw4tr-4';
 // 縦長ウィンドウ時
 // Mildomのブレイクポイントに合わせる
 @media only screen and (max-width: 900px) {
-	// 左/右カラムを縦並びとする
-	div.room__body, div.content {
-		flex-direction: column;
-	}
-
 	// デフォルトで隠す対象を隠す
 	div.gift-panel, div.room-relative, div.playback-page__more, div.chat-panel__header,
 	#{$obfuscatedGiftPanel}, #{$obfuscatedRelative}, #{$obfuscatedChatPanelHeader} {
@@ -70,14 +66,27 @@ $obfuscatedChatPanelFooter: 'div.ycw4tr-4';
 		}
 	}
 
+	// 左/右カラムを縦並びとする
+	div.room__body, div.content, div.match-room__main {
+		flex-direction: column;
+	}
+
 	// 全体ラッパーの高さ制限不要
 	div.default-layout__content-wrapper, div.room-container {
 		height: 100%;
 	}
 
 	// なぜMildomさんは動画を最小幅ウィンドウからはみ出させたがるのか
-	div.room__player, #{$obfuscatedRoomPlayer} {
+	div.room__player, #{$obfuscatedRoomPlayer}, div.match-room__body {
 		min-width: 0;
+	}
+	div.match-room__player-area, div.xpx544-0 {
+		width: calc(100vw - #{$leftMenuWidth});
+	}
+
+	// 公式マッチ配信のトップビジュアル非表示
+	a.sc-1jjaivq-0 {
+		display: none;
 	}
 
 	// ギフトパネルの位置調整
@@ -110,12 +119,12 @@ $obfuscatedChatPanelFooter: 'div.ycw4tr-4';
 	}
 
 	// チャット表示欄のラッパー
-	div.room__chat, #{$obfuscatedRoomChat} {
+	div.room__chat, #{$obfuscatedRoomChat}, div.match-room__chat {
 		display: flex;
 		flex: 1;
 		
-		position: fixed;
-		top: calc((100vw - #{$leftMenuWidth}) * #{$aspectRatio} + #{$headerHeight} + #{$displaySwitchHeight});
+		position: fixed !important;
+		top: calc((100vw - #{$leftMenuWidth}) * #{$aspectRatio} + #{$headerHeight} + #{$displaySwitchHeight}) !important;
 		left: #{$leftMenuWidth};
 		z-index: 197;
 
@@ -167,6 +176,11 @@ $obfuscatedChatPanelFooter: 'div.ycw4tr-4';
 
 	// アーカイブでチャットが再生できる告知などいらない
 	div.playback-chat-panel-attention {
+		display: none;
+	}
+
+	// 公式マッチ配信時は関連動画出ない
+	div.match-room-container label[for='neo-mildom--relative'] {
 		display: none;
 	}
 
