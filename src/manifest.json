@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "Neo Mildom",
-	"version": "0.0.9",
+	"version": "0.0.10",
 	"description": "Google Chrome拡張機能。Mildomを縦長ウィンドウで見る際のUIを改良。上に画面, 下にチャット欄の配置に。これぞネオなMildom。",
 	"icons" :
 	{

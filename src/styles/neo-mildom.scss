@@ -78,10 +78,15 @@ $obfuscatedChatPanelFooter: 'div.ycw4tr-5';
 
 	// なぜMildomさんは動画を最小幅ウィンドウからはみ出させたがるのか
 	div.room__player, #{$obfuscatedRoomPlayer}, div.match-room__body {
-		min-width: initial;
+		min-width: 0;
 	}
 	div.match-room__player-area, div.xpx544-0 {
 		width: calc(100vw - #{$leftMenuWidth});
+	}
+
+	// 動画上下に謎スペース生成しないで
+	div.room_player_container {
+		height: auto;
 	}
 
 	// 公式マッチ配信のトップビジュアル非表示
