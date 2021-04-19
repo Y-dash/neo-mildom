@@ -32,13 +32,13 @@ gulp.task(JAVASCRIPT_TASK, (done) => {
 
 gulp.task(SCSS_TASK, (done) => {
 	gulp.src(SCSS_SRC_PATH)
-	.pipe(plumber())
-	.pipe(sass())
-	.pipe(autoprefixer({
-		grid: true
-	}))
-	.pipe(cleanCss())
-	.pipe(gulp.dest(SCSS_DIST_PATH));
+		.pipe(plumber())
+		.pipe(sass())
+		.pipe(autoprefixer({
+			grid: true
+		}))
+		.pipe(cleanCss())
+		.pipe(gulp.dest(SCSS_DIST_PATH));
 	done();
 })
 
