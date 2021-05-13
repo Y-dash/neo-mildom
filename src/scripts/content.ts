@@ -2,6 +2,7 @@ const COMMON_CLASS_NAME: string = 'ts--neo-mildom';
 // 難読化対応
 const OBFUSCATED_GIFT_PANEL: string = 'div.m57z8b-0';
 const OBFUSCATED_RELATIVE: string = 'div.xr43zp-0';
+const OBFUSCATED_PLAYBACK_PAGE_MORE: string = 'div.sc-1icx48z-0';
 const OBFUSCATED_ROOM_CHAT: string = 'div.xb72g0-2';
 const OBFUSCATED_CHAT_PANEL_HEADER: string = 'div.ycw4tr-3';
 const OBFUSCATED_CHAT_PANEL: string = 'div.ycw4tr-1';
@@ -37,7 +38,7 @@ function getRelative(): HTMLElement | null {
 }
 
 function getPlaybackPageMore(): HTMLElement | null {
-	return document.querySelector('div.playback-page__more');
+	return document.querySelector(`div.playback-page__more, ${OBFUSCATED_PLAYBACK_PAGE_MORE}`);
 }
 
 function getChatPanel(): HTMLElement | null {
