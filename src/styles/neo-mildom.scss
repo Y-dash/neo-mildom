@@ -8,10 +8,11 @@ $chatPanelFooterHeightAdjust: 9;
 $matchVisualHeight: 400px;
 
 // 難読化対応
-$obfuscatedRoomPlayer: 'div.xb72g0-0';
+$obfuscatedRoomPlayer: 'div.nxikdd-0';
+$obfuscatedMatchRoomPlayerArea: 'div.nxikdd-4';
 $obfuscatedGiftPanel: 'div.m57z8b-0';
 $obfuscatedRelative: 'div.xr43zp-0';
-$obfuscatedRoomChat: 'div.xb72g0-2';
+$obfuscatedRoomChat: 'div.nxikdd-2';
 $obfuscatedChatPanelHeader: 'div.ycw4tr-3';
 $obfuscatedChatPanel: 'div.ycw4tr-1';
 $obfuscatedChatPanelFooterContainer: 'div.ycw4tr-4';
@@ -24,7 +25,7 @@ $obfuscatedChatPanelFooter: 'div.ycw4tr-5';
 
 // 縦長ウィンドウ時
 // Mildomのブレイクポイントに合わせる
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 920px) {
 	// デフォルトで隠す対象を隠す
 	div.gift-panel, div.room-relative, div.playback-page__more, div.chat-panel__header,
 	#{$obfuscatedGiftPanel}, #{$obfuscatedRelative}, #{$obfuscatedChatPanelHeader} {
@@ -77,10 +78,10 @@ $obfuscatedChatPanelFooter: 'div.ycw4tr-5';
 	}
 
 	// なぜMildomさんは動画を最小幅ウィンドウからはみ出させたがるのか
-	div.room__player, #{$obfuscatedRoomPlayer}, div.match-room__body, div.izVnHT {
+	div.room__player, #{$obfuscatedRoomPlayer}, div.match-room__body {
 		min-width: 0;
 	}
-	div.match-room__player-area, div.xpx544-0 {
+	div.match-room__player-area, #{$obfuscatedMatchRoomPlayerArea} {
 		width: calc(100vw - #{$leftMenuWidth});
 	}
 
