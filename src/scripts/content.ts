@@ -17,20 +17,17 @@ const RELATIVE_ID: string = 'neo-mildom--relative';
 const COMMENT_ID: string = 'neo-mildom--comment';
 const PLAYBACK_ID: string = 'neo-mildom--playback';
 
-let mutationObserver: MutationObserver = new MutationObserver(init);
+let mutationObserver: MutationObserver = new MutationObserver(initPage);
+let headElement: HTMLHeadElement | null = document.getElementsByTagName('head')[0];
 
-document.addEventListener('DOMContentLoaded', () => {
-	let headElement: HTMLHeadElement | null = document.getElementsByTagName('head')[0];
-	
-	if (headElement) {
-		mutationObserver.observe(headElement, {
-			childList: true,
-			subtree: true
-		});
-	}
+if (headElement) {
+	mutationObserver.observe(headElement, {
+		childList: true,
+		subtree: true
+	});
+}
 
-	init();
-});
+initPage();
 
 function getGiftPanel(): HTMLElement | null {
 	return document.querySelector(`div.gift-panel, ${OBFUSCATED_GIFT_PANEL}`);
@@ -60,7 +57,7 @@ function makeRoomChatHeaderCheckbox(): HTMLElement {
 	return chatPanelHeaderCheckbox;
 }
 
-function init() {
+function initPage() {
 	if (document.querySelector(`.${COMMON_CLASS_NAME}`)) {
 		return;
 	}
