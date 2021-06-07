@@ -13,6 +13,7 @@ $obfuscatedRoomPlayer: 'div.nxikdd-0';
 $obfuscatedMatchRoomPlayerArea: 'div.nxikdd-4';
 $obfuscatedGiftPanel: 'div.m57z8b-0';
 $obfuscatedRelative: 'div.xr43zp-0';
+$obfuscatedClip: 'div.sc-106900g-2';
 $obfuscatedPlaybackPageMore: 'div.sc-1icx48z-0';
 $obfuscatedRoomChat: 'div.nxikdd-2';
 $obfuscatedChatPanelHeader: 'div.ycw4tr-3';
@@ -31,7 +32,7 @@ $obfuscatedChatPanelFooter: 'div.ycw4tr-5';
 	// デフォルトで隠す対象を隠す
 	div.gift-panel, div.room-relative,
 	div.playback-page__more, div.chat-panel__header,
-	#{$obfuscatedGiftPanel}, #{$obfuscatedRelative},
+	#{$obfuscatedGiftPanel}, #{$obfuscatedRelative}, #{$obfuscatedClip},
 	#{$obfuscatedPlaybackPageMore}, #{$obfuscatedChatPanelHeader} {
 		transform: scaleY(0);
 		transition-duration: .2s;
@@ -116,7 +117,7 @@ $obfuscatedChatPanelFooter: 'div.ycw4tr-5';
 
 	// おすすめ動画などの位置調整
 	div.room-relative, div.playback-page__more,
-	#{$obfuscatedRelative}, #{$obfuscatedPlaybackPageMore} {
+	#{$obfuscatedRelative}, #{$obfuscatedClip}, #{$obfuscatedPlaybackPageMore} {
 		position: relative;
 		z-index: 198;
 		
@@ -214,6 +215,7 @@ $obfuscatedChatPanelFooter: 'div.ycw4tr-5';
 	#neo-mildom--chat-panel-header:checked ~ div.chat-panel__header,
 	#neo-mildom--gift:checked ~ #{$obfuscatedGiftPanel},
 	#neo-mildom--relative:checked ~ #{$obfuscatedRelative},
+	#neo-mildom--relative:checked ~ #{$obfuscatedClip},
 	#neo-mildom--playback:checked ~ #{$obfuscatedPlaybackPageMore},
 	#neo-mildom--chat-panel-header:checked ~ #{$obfuscatedChatPanelHeader} {
 		transform: scaleY(1);

@@ -18,16 +18,19 @@ const COMMENT_ID: string = 'neo-mildom--comment';
 const PLAYBACK_ID: string = 'neo-mildom--playback';
 
 let mutationObserver: MutationObserver = new MutationObserver(init);
-let rootElement: HTMLElement | null = document.getElementById('root');
 
-if (rootElement) {
-	mutationObserver.observe(rootElement, {
-		childList: true,
-		subtree: true
-	});
-}
+document.addEventListener('DOMContentLoaded', () => {
+	let headElement: HTMLHeadElement | null = document.getElementsByTagName('head')[0];
+	
+	if (headElement) {
+		mutationObserver.observe(headElement, {
+			childList: true,
+			subtree: true
+		});
+	}
 
-init();
+	init();
+});
 
 function getGiftPanel(): HTMLElement | null {
 	return document.querySelector(`div.gift-panel, ${OBFUSCATED_GIFT_PANEL}`);
