@@ -4,15 +4,12 @@ const OBFUSCATED_GIFT_PANEL: string = 'div.m57z8b-0';
 const OBFUSCATED_RELATIVE: string = 'div.xr43zp-0';
 const OBFUSCATED_PLAYBACK_PAGE_MORE: string = 'div.sc-1icx48z-0';
 const OBFUSCATED_ROOM_CHAT: string = 'div.xb72g0-2';
-const OBFUSCATED_CHAT_PANEL_HEADER: string = 'div.ycw4tr-3';
 const OBFUSCATED_CHAT_PANEL: string = 'div.ycw4tr-1';
-const OBFUSCATED_CHAT_PANEL_FOOTER_CONTAINER: string = 'div.ycw4tr-4';
 
 const DISPLAY_SWITCH_CLASS: string = 'neo-mildom--display-switch';
 const DISPLAY_SWITCH_LABEL_CLASS: string = `${DISPLAY_SWITCH_CLASS}__label`;
 const DISPLAY_SWITCH_DESCRIPTION_CLASS: string = `${DISPLAY_SWITCH_CLASS}__description`;
 const GIFT_ID: string = 'neo-mildom--gift';
-const CHAT_PANEL_HEADER_ID: string = 'neo-mildom--chat-panel-header';
 const RELATIVE_ID: string = 'neo-mildom--relative';
 const COMMENT_ID: string = 'neo-mildom--comment';
 const PLAYBACK_ID: string = 'neo-mildom--playback';
@@ -43,18 +40,6 @@ function getPlaybackPageMore(): HTMLElement | null {
 
 function getChatPanel(): HTMLElement | null {
 	return document.querySelector(`div.chat-panel, ${OBFUSCATED_CHAT_PANEL}`);
-}
-
-function getChatPanelHeader(): HTMLElement | null {
-	return document.querySelector(`div.chat-panel__header, ${OBFUSCATED_CHAT_PANEL_HEADER}`);
-}
-
-function makeRoomChatHeaderCheckbox(): HTMLElement {
-	let chatPanelHeaderCheckbox: HTMLElement = document.createElement('input');
-	chatPanelHeaderCheckbox.setAttribute('type', 'checkbox');
-	chatPanelHeaderCheckbox.setAttribute('id', CHAT_PANEL_HEADER_ID);
-	chatPanelHeaderCheckbox.classList.add(COMMON_CLASS_NAME);
-	return chatPanelHeaderCheckbox;
 }
 
 function initPage() {
@@ -92,7 +77,6 @@ function initOnLive() {
 	displaySwitch.setAttribute('class', DISPLAY_SWITCH_CLASS);
 	displaySwitch.innerHTML = `
 		<div class="${DISPLAY_SWITCH_DESCRIPTION_CLASS}">表示切替</div>
-		<label for="${CHAT_PANEL_HEADER_ID}" class="${DISPLAY_SWITCH_LABEL_CLASS}">概要</label>
 		<label for="${GIFT_ID}" class="${DISPLAY_SWITCH_LABEL_CLASS}">ギフト欄</label>
 		<label for="${RELATIVE_ID}" class="${DISPLAY_SWITCH_LABEL_CLASS}">関連動画</label>
 		<label for="${COMMENT_ID}" class="${DISPLAY_SWITCH_LABEL_CLASS} ${DISPLAY_SWITCH_LABEL_CLASS}--comment">コメント入力欄</label>`;
@@ -102,7 +86,6 @@ function initOnLive() {
 	getRelative()?.parentNode?.insertBefore(relativeCheckbox, getRelative());
 	getChatPanel()?.parentNode?.insertBefore(commentCheckbox, getChatPanel());
 	getGiftPanel()?.parentNode?.insertBefore(displaySwitch, getGiftPanel());
-	getChatPanelHeader()?.parentElement?.insertBefore(makeRoomChatHeaderCheckbox(), getChatPanelHeader());
 }
 
 function initOnArchive() {
@@ -115,11 +98,9 @@ function initOnArchive() {
 	playbackDisplaySwitch.setAttribute('class', DISPLAY_SWITCH_CLASS);
 	playbackDisplaySwitch.innerHTML = `
 		<div class="${DISPLAY_SWITCH_DESCRIPTION_CLASS}">表示切替</div>
-		<label for="${CHAT_PANEL_HEADER_ID}" class="${DISPLAY_SWITCH_LABEL_CLASS}">概要</label>
 		<label for="${PLAYBACK_ID}" class="${DISPLAY_SWITCH_LABEL_CLASS}">アーカイブ一覧</label>`;
 	playbackDisplaySwitch.classList.add(COMMON_CLASS_NAME);
 
 	getPlaybackPageMore()?.parentNode?.insertBefore(playbackCheckbox, getPlaybackPageMore());
 	getPlaybackPageMore()?.parentNode?.insertBefore(playbackDisplaySwitch, getPlaybackPageMore());
-	getChatPanelHeader()?.parentElement?.insertBefore(makeRoomChatHeaderCheckbox(), getChatPanelHeader());
 }
