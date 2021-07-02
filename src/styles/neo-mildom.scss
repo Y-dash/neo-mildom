@@ -195,6 +195,11 @@ $obfuscatedDescription: 'div.u7nnmt-0';
 		display: none;
 	}
 
+	// チャット入力欄位置調整
+	#{$obfuscatedChatPanelFooterContainer} {
+		margin-bottom: -50px;
+	}
+
 	// チャット入力欄のアイコン欄 下げて縮める
 	div.chat-panel__footer {
 		bottom: 91px - $chatPanelFooterHeightAdjust;
