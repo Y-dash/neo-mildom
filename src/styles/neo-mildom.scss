@@ -190,11 +190,6 @@ $obfuscatedDescription: 'div.u7nnmt-0';
 		padding-bottom: 30px;
 	}
 
-	// オフィシャル伝書鳩不要
-	div.chat-panel__relay {
-		display: none;
-	}
-
 	// チャット入力欄位置調整
 	#{$obfuscatedChatPanelFooterContainer} {
 		margin-bottom: -50px;
@@ -258,4 +253,9 @@ $obfuscatedDescription: 'div.u7nnmt-0';
 	#neo-mildom--comment:checked ~ #{$obfuscatedChatPanel} div.chat-panel__footer-container {
 		display: none;
 	}
+}
+
+// オフィシャル伝書鳩不要
+div.chat-panel__relay, div.sc-665413-0 {
+	display: none;
 }
