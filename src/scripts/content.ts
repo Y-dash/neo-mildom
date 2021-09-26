@@ -1,10 +1,10 @@
 const COMMON_CLASS_NAME: string = 'ts--neo-mildom';
 // 難読化対応
-const OBFUSCATED_GIFT_PANEL: string = 'div.m57z8b-0';
-const OBFUSCATED_RELATIVE: string = 'div.xr43zp-0';
+const OBFUSCATED_GIFT_PANEL: string = 'div.sc-m57z8b-0';
+const OBFUSCATED_RELATIVE: string = 'div.sc-xr43zp-0';
 const OBFUSCATED_PLAYBACK_PAGE_MORE: string = 'div.sc-1icx48z-0';
-const OBFUSCATED_ROOM_CHAT: string = 'div.xb72g0-2';
-const OBFUSCATED_CHAT_PANEL: string = 'div.ycw4tr-1';
+const OBFUSCATED_ROOM_CHAT: string = 'div.sc-nxikdd-0';
+const OBFUSCATED_CHAT_PANEL: string = 'div.sc-ycw4tr-1';
 
 const DISPLAY_SWITCH_CLASS: string = 'neo-mildom--display-switch';
 const DISPLAY_SWITCH_LABEL_CLASS: string = `${DISPLAY_SWITCH_CLASS}__label`;
