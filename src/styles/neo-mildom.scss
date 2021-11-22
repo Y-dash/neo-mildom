@@ -18,9 +18,9 @@ $obfuscatedClip: 'div.sc-106900g-2';
 $obfuscatedPlaybackPageMore: 'div.sc-1icx48z-0';
 $obfuscatedRoomChat: 'div.sc-nxikdd-0';
 $obfuscatedChatPanelHeader: 'div.sc-ycw4tr-3';
-$obfuscatedChatPanel: 'div.sc-ycw4tr-1';
-$obfuscatedChatPanelFooterContainer: 'div.sc-ycw4tr-4';
-$obfuscatedChatPanelFooter: 'div.sc-ycw4tr-5';
+$obfuscatedChatPanel: 'div#chat-panel-area';
+$obfuscatedChatPanelFooterContainer: 'div.sc-reiprf-3';
+$obfuscatedChatPanelFooter: 'div.sc-reiprf-4';
 $obfuscatedTag: 'div.sc-as95bd-0';
 $obfuscatedDescription: 'div.sc-u7nnmt-0';
 
@@ -191,8 +191,8 @@ $obfuscatedDescription: 'div.sc-u7nnmt-0';
 	div.sc-1hi6jzo-2, div.qnpu9w-2, div.qnpu9w-3, div.cRLIUC, div.hdsmBi {
 		padding: 0;
 	}
-	div.playback-chat-panel, div.qnpu9w-2 {
-		padding-bottom: 30px;
+	div.playback-chat-panel, div.qnpu9w-2, div.chat-panel-playback {
+		padding-bottom: 100px;
 	}
 
 	// チャット入力欄位置調整
@@ -209,8 +209,13 @@ $obfuscatedDescription: 'div.sc-u7nnmt-0';
 	}
 
 	// チャット文字入力欄の下が狭くなりすぎるから上げる
-	div.sc-1fhicl-0 {
+	div.sc-1mcgkb7-0 {
 		top: 58px - $chatPanelFooterHeightAdjust - 13;
+	}
+
+	// アーカイブの概要非表示で
+	div.panel-header {
+		display: none !important;
 	}
 
 	// アーカイブでチャットが再生できる告知などいらない
@@ -240,7 +245,6 @@ $obfuscatedDescription: 'div.sc-u7nnmt-0';
 		display: none;
 	}
 
-
 	// 表示切替でデフォルト非表示項目を表示時
 	#neo-mildom--gift:checked ~ div.gift-panel,
 	#neo-mildom--relative:checked ~ div.room-relative,
@@ -257,7 +261,7 @@ $obfuscatedDescription: 'div.sc-u7nnmt-0';
 	// 表示切替でチャット非表示時
 	#neo-mildom--comment:checked ~ div.chat-panel,
 	#neo-mildom--comment:checked ~ #{$obfuscatedChatPanel} {
-		padding-bottom: 30px;
+		padding-bottom: 20px;
 	}
 	#neo-mildom--comment:checked ~ div.chat-panel div.chat-panel__footer-container,
 	#neo-mildom--comment:checked ~ #{$obfuscatedChatPanel} div.chat-panel__footer-container {
