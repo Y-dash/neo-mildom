@@ -1,5 +1,9 @@
 # Neo Mildom
 
+Mildomのサービス終了決定に伴いArchiveとします。
+
+----
+
 Google Chrome拡張機能。Mildomを縦長ウィンドウで見る際のUIを改良。上に画面, 下にチャット欄の配置に。これぞネオなMildom。
 
 その他機能 : 縦長ウィンドウでの閲覧時、
@@ -14,6 +18,6 @@ Google Chrome拡張機能。Mildomを縦長ウィンドウで見る際のUIを�
 
 ----
 
-[Neo Mildom \- Chrome ウェブストア](https://chrome.google.com/webstore/detail/neo-mildom/nnjelmogknklegnlegdpgelpbdmmipal)
+~~[Neo Mildom \- Chrome ウェブストア](https://chrome.google.com/webstore/detail/neo-mildom/nnjelmogknklegnlegdpgelpbdmmipal)~~
 
 ----
